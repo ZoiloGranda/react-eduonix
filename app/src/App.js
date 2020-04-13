@@ -13,18 +13,16 @@ class App extends React.Component {
  }
  render(){
   var array = ['welcome', 'to', 'my', 'course']
-  var arrayToRender = [];
-  array.forEach((word, index) => {
-   arrayToRender.push(<p key={index}>{word}</p>)
-  });
-  
+    
   return (
    <div className="App">
    <header className="App-header">
    <img src={logo} className="App-logo" alt="logo" />
    </header>
    <NameComponent></NameComponent>
-   {arrayToRender}
+   {array.map((word, index) =>{
+    return (<p key={index}>{word}</p>)
+   })}
    <button onClick={this.logFunction}>Press me</button>
    </div>
   );
