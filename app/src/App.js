@@ -5,25 +5,34 @@ import NameComponent from './components/NameComponent';
 
 
 class App extends React.Component {
+ 
+ constructor(props){
+  super(props)
+  this.handleClick = this.handleClick.bind(this)
+  this.state ={
+   user_name: 'Pedro',
+   profession: 'Developer'
+  }
+ }
  componentDidMount(){
   console.log('mounted')
  }
- logFunction(){
-  console.log('nicee')
+ handleClick(){
+  this.setState({
+   user_name: 'Pablo',
+   profession: 'Designer'
+  })
  }
  render(){
-  var array = ['welcome', 'to', 'my', 'course']
-    
+  const {user_name, profession}= this.state;
   return (
    <div className="App">
    <header className="App-header">
    <img src={logo} className="App-logo" alt="logo" />
    </header>
    <NameComponent></NameComponent>
-   {array.map((word, index) =>{
-    return (<p key={index}>{word}</p>)
-   })}
-   <button onClick={this.logFunction}>Press me</button>
+   <p>{user_name} {profession}</p>
+   <button onClick={this.handleClick.bind(this)}>Press me</button>
    </div>
   );
   
