@@ -17,6 +17,11 @@ class App extends React.Component {
  componentDidMount(){
   console.log('mounted')
  }
+ 
+ componentDidUpdate(){
+  console.log('update')
+ }
+ 
  handleClick(){
   this.setState({
    user_name: 'Pablo Chirinos',
