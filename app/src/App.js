@@ -19,7 +19,7 @@ class App extends React.Component {
  }
  handleClick(){
   this.setState({
-   user_name: 'Pablo',
+   user_name: 'Pablo Chirinos',
    profession: 'Designer'
   })
  }
@@ -30,9 +30,11 @@ class App extends React.Component {
    <header className="App-header">
    <img src={logo} className="App-logo" alt="logo" />
    </header>
-   <NameComponent></NameComponent>
+   <NameComponent user_name={this.state.user_name}/>
    <p>{user_name} {profession}</p>
-   <button onClick={this.handleClick.bind(this)}>Press me</button>
+   <button onClick={this.handleClick.bind(this)}>
+   <NameComponent/>
+   </button>
    </div>
   );
   
