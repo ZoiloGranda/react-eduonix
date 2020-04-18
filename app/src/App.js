@@ -1,45 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import NameComponent from './components/NameComponent';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap';
+import Select from 'react-select';
 
+const options = [
+ { value: 'chocolate', label: 'Chocolate' },
+ { value: 'strawberry', label: 'Strawberry' },
+ { value: 'vanilla', label: 'Vanilla' }
+]
 
 class App extends React.Component {
  
- constructor(props){
+ constructor(props) {
   super(props)
-  this.handleClick = this.handleClick.bind(this)
-  this.state ={
-   user_name: 'Pedro',
-   profession: 'Developer'
+  this.state = {
+   selectedOption:''
   }
  }
- componentDidMount(){
+ componentDidMount() {
   console.log('mounted')
  }
  
- componentDidUpdate(){
+ componentDidUpdate() {
   console.log('update')
  }
  
- handleClick(){
+ handleChange(selectedOption){
   this.setState({
-   user_name: 'Pablo Chirinos',
-   profession: 'Designer'
+   selectedOption:selectedOption?selectedOption:''
   })
+  console.log(selectedOption);
  }
- render(){
-  const {user_name, profession}= this.state;
+ 
+ render() {
   return (
-   <div className="App">
-   <header className="App-header">
-   <img src={logo} className="App-logo" alt="logo" />
-   </header>
-   <NameComponent user_name={this.state.user_name}/>
-   <p>{user_name} {profession}</p>
-   <button onClick={this.handleClick.bind(this)}>
-   <NameComponent/>
-   </button>
+   <div>
+    <Navbar bg="light" expand="lg">
+     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+     <Navbar.Toggle aria-controls="basic-navbar-nav" />
+     <Navbar.Collapse id="basic-navbar-nav">
+      <Nav className="mr-auto">
+       <Nav.Link href="#home">Home</Nav.Link>
+       <Nav.Link href="#link">Link</Nav.Link>
+       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Divider />
+        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+       </NavDropdown>
+      </Nav>
+      <Form inline>
+       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+       <Button variant="outline-success">Search</Button>
+      </Form>
+     </Navbar.Collapse>
+    </Navbar>
+    <Container>
+     <Row>
+      <Col>1 of 1</Col>
+     </Row>
+    </Container>
+    <Select onChange={this.handleChange.bind(this)}options={options} />
    </div>
   );
   
