@@ -45,7 +45,7 @@ export function loadInfo(results) {
 
 export function newInfo(results) {
  return {
-  type: NEW_DATA,
+  type: NEW_INFO,
   payload: results
  }
 }
