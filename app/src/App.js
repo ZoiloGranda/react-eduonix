@@ -3,52 +3,58 @@ import './App.css';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col, Table } from 'react-bootstrap';
 import Select from 'react-select';
 
-const options = [
- { value: 'chocolate', label: 'Chocolate' },
- { value: 'strawberry', label: 'Strawberry' },
- { value: 'vanilla', label: 'Vanilla' }
-]
+// const options = [
+//  { value: 'chocolate', label: 'Chocolate' },
+//  { value: 'strawberry', label: 'Strawberry' },
+//  { value: 'vanilla', label: 'Vanilla' }
+// ]
 
 class App extends React.Component {
- 
+
  constructor(props) {
   super(props)
   this.state = {
-   selectedOption:'',
-   jsonList:[]
+   selectedOption: '',
+   jsonList: []
   }
  }
  componentDidMount() {
-   fetch('http://www.json-generator.com/api/json/get/bUcAKTZpRu?indent=2',{
+  fetch('http://www.json-generator.com/api/json/get/bUcAKTZpRu?indent=2', {
     method: 'GET'
    })
    .then(response => response.json())
-   .then(json=>{
+   .then(json => {
     console.log(json);
     this.setState({
-     jsonList:json
+     jsonList: json
     })
    })
-   .catch(error =>{
+   .catch(error => {
     console.log(error);
    })
-  
+
  }
- 
+
  componentDidUpdate() {
   console.log('update')
  }
- 
- handleChange(selectedOption){
+
+ handleChange(selectedOption) {
   this.setState({
-   selectedOption:selectedOption?selectedOption:''
+   selectedOption: selectedOption ? selectedOption : ''
   })
   console.log(selectedOption);
  }
- 
- render() {
-  return (
-   <div>
+
+ render(){
+ const selectList = this.state.jsonList.map(item => {
+  return {
+   value: item.name,
+   label: item.name
+  }
+ })
+ return (
+  <div>
     <Navbar bg="light" expand="lg">
      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
      <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -77,7 +83,7 @@ class App extends React.Component {
     </Container>
     <div className="row">
      <div className="col-sm-3">
-    <Select onChange={this.handleChange.bind(this)}options={options} />
+    <Select onChange={this.handleChange.bind(this)}options={selectList} />
     </div>
     </div>
     <hr/>
@@ -92,23 +98,25 @@ class App extends React.Component {
    </thead>
    <tbody>
     {this.state.jsonList.map(item=>{
-     return (
-      <tr>
+     if (this.state.selectedOption==='' || item.name===this.state.selectedOption.value) {
+      return (
+       <tr>
         <td>{item.name}</td>
         <td>{item.address}</td>
         <td>{item.age}</td>
         <td>{item.company}</td>
-      </tr>
-     )
+       </tr>
+      )
+     }
     })}
  
     </tbody>
  </Table>
 
    </div>
-  );
-  
- }
+ );
+
+}
 }
 
 export default App;
