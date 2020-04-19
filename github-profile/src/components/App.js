@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav} from 'react-bootstrap';
-import Slider from './Slider';
+import SliderComponent from './Slider';
 import Profile from './Profile';
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
       </Navbar.Collapse>
      </Navbar>
      <div>
-      {this.state.currentTab==='slider'?<Slider/>:false}
+      {this.state.currentTab==='slider'?<SliderComponent/>:false}
       {this.state.currentTab==='profile'?<Profile/>:false}
      </div>
     </div>
