@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col, Table } from 'react-bootstrap';
 import Select from 'react-select';
-import {fetchInfo} from '../actions/actions_info';
+import { fetchInfo } from '../actions/actions_info';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class AppComponent extends React.Component {
 
@@ -19,8 +19,7 @@ class AppComponent extends React.Component {
   this.props.dispatch(fetchInfo())
  }
 
- componentDidUpdate() {
- }
+ componentDidUpdate() {}
 
  handleChange(selectedOption) {
   this.setState({
@@ -29,15 +28,15 @@ class AppComponent extends React.Component {
   console.log(selectedOption);
  }
 
- render(){
- const selectList = this.state.jsonList.map(item => {
-  return {
-   value: item.name,
-   label: item.name
-  }
- })
- return (
-  <div>
+ render() {
+  const selectList = this.state.jsonList.map(item => {
+   return {
+    value: item.name,
+    label: item.name
+   }
+  })
+  return (
+   <div>
     <Navbar bg="light" expand="lg">
      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
      <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -97,9 +96,9 @@ class AppComponent extends React.Component {
  </Table>
 
    </div>
- );
+  );
 
-}
+ }
 }
 const App = connect()(AppComponent);
 export default App;
