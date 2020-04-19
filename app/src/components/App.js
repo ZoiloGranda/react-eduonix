@@ -5,13 +5,12 @@ import { fetchInfo } from '../actions/actions_info';
 
 import { connect } from 'react-redux';
 
-class AppComponent extends React.Component {
+class App extends React.Component {
 
  constructor(props) {
   super(props)
   this.state = {
-   selectedOption: '',
-   jsonList: []
+   selectedOption: '' 
   }
  }
  componentDidMount() {
@@ -29,7 +28,7 @@ class AppComponent extends React.Component {
  }
 
  render() {
-  const selectList = this.state.jsonList.map(item => {
+  const selectList = this.props.info.map(item => {
    return {
     value: item.name,
     label: item.name
@@ -79,10 +78,10 @@ class AppComponent extends React.Component {
      </tr>
    </thead>
    <tbody>
-    {this.state.jsonList.map(item=>{
+    {this.props.info.map(item=>{
      if (this.state.selectedOption==='' || item.name===this.state.selectedOption.value) {
       return (
-       <tr>
+       <tr key={"item-"+item.name}>
         <td>{item.name}</td>
         <td>{item.address}</td>
         <td>{item.age}</td>
@@ -100,5 +99,4 @@ class AppComponent extends React.Component {
 
  }
 }
-const App = connect()(AppComponent);
 export default App;
