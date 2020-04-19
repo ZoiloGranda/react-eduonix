@@ -1,15 +1,11 @@
 import React from 'react';
-import './App.css';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col, Table } from 'react-bootstrap';
 import Select from 'react-select';
+import {fetchInfo} from '../actions/actions_info';
 
-// const options = [
-//  { value: 'chocolate', label: 'Chocolate' },
-//  { value: 'strawberry', label: 'Strawberry' },
-//  { value: 'vanilla', label: 'Vanilla' }
-// ]
+import {connect} from 'react-redux';
 
-class App extends React.Component {
+class AppComponent extends React.Component {
 
  constructor(props) {
   super(props)
@@ -19,24 +15,11 @@ class App extends React.Component {
   }
  }
  componentDidMount() {
-  fetch('http://www.json-generator.com/api/json/get/bUcAKTZpRu?indent=2', {
-    method: 'GET'
-   })
-   .then(response => response.json())
-   .then(json => {
-    console.log(json);
-    this.setState({
-     jsonList: json
-    })
-   })
-   .catch(error => {
-    console.log(error);
-   })
-
+  // console.log(this.props.dispatch);
+  this.props.dispatch(fetchInfo())
  }
 
  componentDidUpdate() {
-  console.log('update')
  }
 
  handleChange(selectedOption) {
@@ -118,5 +101,5 @@ class App extends React.Component {
 
 }
 }
-
+const App = connect()(AppComponent);
 export default App;
