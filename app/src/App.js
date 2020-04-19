@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Container, Row, Col, Table } from 'react-bootstrap';
 import Select from 'react-select';
 
 const options = [
@@ -14,11 +14,25 @@ class App extends React.Component {
  constructor(props) {
   super(props)
   this.state = {
-   selectedOption:''
+   selectedOption:'',
+   jsonList:[]
   }
  }
  componentDidMount() {
-  console.log('mounted')
+   fetch('http://www.json-generator.com/api/json/get/bUcAKTZpRu?indent=2',{
+    method: 'GET'
+   })
+   .then(response => response.json())
+   .then(json=>{
+    console.log(json);
+    this.setState({
+     jsonList:json
+    })
+   })
+   .catch(error =>{
+    console.log(error);
+   })
+  
  }
  
  componentDidUpdate() {
@@ -61,7 +75,36 @@ class App extends React.Component {
       <Col>1 of 1</Col>
      </Row>
     </Container>
+    <div className="row">
+     <div className="col-sm-3">
     <Select onChange={this.handleChange.bind(this)}options={options} />
+    </div>
+    </div>
+    <hr/>
+     <Table striped bordered hover>
+   <thead>
+     <tr>
+       <th>#</th>
+       <th>First Name</th>
+       <th>Last Name</th>
+       <th>Username</th>
+     </tr>
+   </thead>
+   <tbody>
+    {this.state.jsonList.map(item=>{
+     return (
+      <tr>
+        <td>{item.name}</td>
+        <td>{item.address}</td>
+        <td>{item.age}</td>
+        <td>{item.company}</td>
+      </tr>
+     )
+    })}
+ 
+    </tbody>
+ </Table>
+
    </div>
   );
   
