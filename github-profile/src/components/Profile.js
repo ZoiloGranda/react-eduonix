@@ -37,10 +37,11 @@ class Profile extends React.Component {
  
  render() {
   return (
-   <div className="container">
+   <div className="container mt-2">
     <Button variant="primary" onClick={()=>this.setState({editing:!this.state.editing})}>Edit</Button>{' '}
      <hr/>
-    {this.state.editing ? 
+    {this.state.editing ?
+     <div>
     <Form.Group>
      <Form.Label>Name</Form.Label>
      <Form.Control 
@@ -61,7 +62,7 @@ class Profile extends React.Component {
      <Form.Label>Location</Form.Label>
      <Form.Control 
       onChange={this.updateValue.bind(this, 'location')} 
-      value={this.state.userInfo.Location} 
+      value={this.state.userInfo.location} 
       type="text" 
       placeholder="Enter Name" />
     </Form.Group>
@@ -73,6 +74,7 @@ class Profile extends React.Component {
       type="text" 
       placeholder="Enter Name" />
     </Form.Group>
+    </div>
     :
     <div>
      <p><strong>Name: </strong>{this.state.userInfo.name} </p>
