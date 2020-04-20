@@ -11,10 +11,6 @@ class Profile extends React.Component {
   }
  }
  
- componentDidMount() {
-  this.props.fetchProfile()
- }
- 
  componentWillReceiveProps(nextProps){
   this.setState({
    userInfo:nextProps.profile
@@ -46,7 +42,9 @@ class Profile extends React.Component {
  render() {
   return (
    <div className="container mt-2">
-    <Button variant="primary" onClick={()=>this.setState({editing:!this.state.editing})}>Edit</Button>{' '}
+    <Button variant="primary" onClick={()=>this.setState({editing:!this.state.editing})}>
+     {this.state.editing ? 'Cancel Edit': 'Edit'}
+    </Button>{' '}
      <hr/>
      {this.state.editing ?
       <React.Fragment>
